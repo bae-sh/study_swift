@@ -1,5 +1,5 @@
 import UIKit
-
+import Foundation
 var str = "Hello, playground"
 
 let value = arc4random_uniform(100)
@@ -58,3 +58,49 @@ if hours > 40{
 }
 
 salary += hours * payPerHour
+
+
+var i = 0
+repeat{
+    print(i);
+    i += 1
+} while i < 10
+
+let closedRange = 0...10
+let halfCloseRange = 0..<10
+
+var sum = 0
+for i in closedRange {
+    print("---> \(i)");
+    sum += i
+}
+print("---> \(sum)")
+
+var sinValue: CGFloat = 0
+for i in closedRange {
+    sinValue = sin(CGFloat.pi/4 * CGFloat(i))
+}
+
+for _ in closedRange {
+    
+}
+
+for i in 1...3 where i % 2 == 0 {
+}
+
+//let num = 10
+
+//case _ where num % 2 == 0:
+
+let coordinate = (x: 0, y: 10)
+
+switch coordinate {
+case (0, 0):
+    print("")
+case (_, 0):
+    print()
+case (let y, 0):
+    print("\(y)")
+default:
+    <#code#>
+}
