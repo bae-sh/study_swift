@@ -56,3 +56,56 @@ for num in evenNumber {
 
 let fir = evenNumber.dropFirst(3)
 evenNumber
+
+
+//Dictionary
+
+//var scoreDic: [String: Int] = ["Jason": 80, "Jay": 95, "Jake": 90]
+var scoreDic: Dictionary<String, Int> = ["Jason": 80, "Jay": 95, "Jake": 90]
+if let score = scoreDic["Jason"]{
+    score
+} else {
+    
+}
+scoreDic["Jason"]
+
+scoreDic["Jarry"]
+
+scoreDic.isEmpty
+scoreDic.count
+
+
+//기존사용자 업데이트
+scoreDic["Jason"] = 99
+
+
+//사용자 추가
+scoreDic["Jack"] = 100
+scoreDic
+
+//for loop
+
+for (name, score) in scoreDic {
+    print("\(name), \(score)")
+}
+
+for key in scoreDic.keys{
+    print(key)
+}
+
+
+var myDic: [String: String] = ["name": "Bae", "job": "student", "city": "Gumi"]
+myDic["city"] = "Busan"
+for (question, answer) in myDic {
+    print("\(question): \(answer)")
+}
+func printNameAndCity(dic: [String: String]){
+    if let name = dic["name"], let city = dic["city"]{
+        print(name, city)
+    } else{
+        print("--> Cannot find")
+    }
+}
+
+printNameAndCity(dic: myDic)
+
