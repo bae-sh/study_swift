@@ -1,8 +1,8 @@
 //
 //  BountyViewController.swift
-//  BountyList
+//  Bounty_Review
 //
-//  Created by 배성현 on 2021/03/11.
+//  Created by 배성현 on 2021/03/19.
 //
 
 import UIKit
@@ -18,50 +18,39 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
             if let index = sender as? Int {
                 vc?.name = nameList[index]
                 vc?.bounty = bountyList[index]
+                
             }
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
     
-    // UITableViewDataSource
+    //UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bountyList.count
+        return bountyList.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else{
             return UITableViewCell()
         }
-        
         let img = UIImage(named: "\(nameList[indexPath.row]).jpg")
         cell.imgView.image = img
         cell.nameLabel.text = nameList[indexPath.row]
         cell.bountyLabel.text = "\(bountyList[indexPath.row])"
         return cell
-        
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell {
-//            let img = UIImage(named: "\(nameList[indexPath.row]).jpg")
-//            cell.imgView.image = img
-//            cell.nameLabel.text = nameList[indexPath.row]
-//            cell.bountyLabel.text = "\(bountyList[indexPath.row])"
-//            return cell
-//        } else {
-//            return UITableViewCell()
-//        }
     }
-    
-    // UITableViewDelegate
+
+    //UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("--> \(indexPath.row)")
         performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
 }
-
-class ListCell: UITableViewCell {
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var bountyLabel: UILabel!
+class ListCell: UITableViewCell{
+    @IBOutlet var imgView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var bountyLabel: UILabel!
 }
