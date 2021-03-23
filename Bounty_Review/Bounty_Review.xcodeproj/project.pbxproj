@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F44BDCAA2608826800D238EE /* BountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44BDCA92608826800D238EE /* BountyInfo.swift */; };
 		F4BA64AA2605D6F4002126AE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA64A92605D6F4002126AE /* DetailViewController.swift */; };
 		F4F90EE726045DB5009E31D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F90EE626045DB5009E31D4 /* AppDelegate.swift */; };
 		F4F90EE926045DB5009E31D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F90EE826045DB5009E31D4 /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F44BDCA92608826800D238EE /* BountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyInfo.swift; sourceTree = "<group>"; };
 		F4BA64A92605D6F4002126AE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F4F90EE326045DB5009E31D4 /* Bounty_Review.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bounty_Review.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F90EE626045DB5009E31D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				F4F90EEA26045DB5009E31D4 /* ViewController.swift */,
 				F4F90EEC26045DB5009E31D4 /* Main.storyboard */,
 				F4F90F0326046455009E31D4 /* BountyViewController.swift */,
+				F44BDCA92608826800D238EE /* BountyInfo.swift */,
 				F4BA64A92605D6F4002126AE /* DetailViewController.swift */,
 				F4F90EEF26045DB6009E31D4 /* Assets.xcassets */,
 				F4F90EF126045DB6009E31D4 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				F4F90F0426046455009E31D4 /* BountyViewController.swift in Sources */,
 				F4BA64AA2605D6F4002126AE /* DetailViewController.swift in Sources */,
 				F4F90EE726045DB5009E31D4 /* AppDelegate.swift in Sources */,
+				F44BDCAA2608826800D238EE /* BountyInfo.swift in Sources */,
 				F4F90EE926045DB5009E31D4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
