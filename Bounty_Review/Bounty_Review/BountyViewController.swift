@@ -27,9 +27,6 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
     // - BountyViewModel
     // > BountyViewModel을 만들고 뷰레이어에서 필요한 메소드 만들기
     // > 모델 가지고 있기 .. BountyInfo 등
-    
-    
-    
     let viewModel = BountyViewModel();
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,6 +59,17 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetail", sender: indexPath.item)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSpacing: CGFloat = 10
+        let textAreaHeight: CGFloat = 65
+        
+        
+        let width: CGFloat = (collectionView.bounds.width - itemSpacing)/2
+        let height: CGFloat = width * 10/7 + textAreaHeight
+        return CGSize(width: width, height: height)
+    }
+}
 //    UICollectionViewDataSource,
 //    몇개를 보여줄까요?
 //    셀은 어떻게 표현할까요?
@@ -74,29 +82,6 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
 //    UICollectionViewDelegateFlowLayout
 //    cell size 를 계산할거다 (목표: 다향 디바이스에서 일관적인 디자인을 보여주기 위해)
     
-//    //UITableViewDataSource
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.numOfBountyInfoList;
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else{
-//            return UITableViewCell()
-//        }
-//
-//        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
-//        cell.update(info: bountyInfo)
-//
-//        return cell
-//    }
-
-    //UITableViewDelegate
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
-//    }
-}
-
-
 class GridCell: UICollectionViewCell{
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -108,8 +93,6 @@ class GridCell: UICollectionViewCell{
         bountyLabel.text = "\(info.bounty)"
     }
 }
-
-
 
 class BountyViewModel {
     let bountyInfoList: [BountyInfo] = [

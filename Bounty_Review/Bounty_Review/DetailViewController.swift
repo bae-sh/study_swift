@@ -31,13 +31,37 @@ class DetailViewController: UIViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var bountyLabel: UILabel!
     
-    
+    @IBOutlet weak var NameLabelCenterX: NSLayoutConstraint!
+    @IBOutlet weak var BountyLabelCenterX: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-
+        prepareAnimation()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showAnimation()
+    }
+    
+    private func prepareAnimation() {
+        NameLabelCenterX.constant = view.bounds.width
+        BountyLabelCenterX.constant = view.bounds.width
+    }
+    
+    private func showAnimation() {
+        NameLabelCenterX.constant = 0
+        BountyLabelCenterX.constant = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .allowUserInteraction, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        UIView.transition(with: imgView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    
     
     func updateUI(){
         
