@@ -10,7 +10,7 @@ import UIKit
 
 
 // TODO: Codable과 Equatable 추가
-struct Todo: Codable, Equatable {
+struct Todo: Codable, Equatable { // codable 덕분에 jason 데이터 형태를 스위프트가 해석함
     let id: Int
     var isDone: Bool
     var detail: String
