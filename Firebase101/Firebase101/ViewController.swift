@@ -14,60 +14,88 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberOfCustomers: UILabel!
     let db = Database.database().reference()
     
+    var customers: [Customer] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabel()
-//        saveBasicTypes()
-//        saveCustomers()
-        fetchCustomers()
     }
     
     func updateLabel() {
         db.child("firstData").observeSingleEvent(of: .value) { snapshot in
-            let value = snapshot.value as? String ?? ""
-            
-            DispatchQueue.main.async {
+            var value = snapshot.value as? String ?? ""
+            if value == "" {
+                value = "Hello, Firebase!!!!"
+                self.db.child("firstData").setValue(value)
+            }
+            DispatchQueue.main.async {//네트워크에서 불러올땐 async를 사용.
                 self.dataLabel.text = value
             }
         }
+        fetchCustomers()
     }
-
+    
+    @IBAction func creatCustomer(_ sender: Any) {
+        saveCustomers()
+        fetchCustomers()
+    }
+    
+    @IBAction func fetchCustomer(_ sender: Any) {
+        fetchCustomers()
+    }
+    
+    func updateCustomer() {
+        guard customers.isEmpty == false else { return }
+        customers[0].name = "Min"
+        
+        let dictionary = customers.map { $0.toDic }
+        db.updateChildValues(["customers": dictionary])
+    }
+    
+    @IBAction func updateCustomer(_ sender: Any) {
+        updateCustomer()
+    }
+    func deleteCustomer() {
+        db.child("customers").removeValue()
+        customers.removeAll()
+        fetchCustomers()
+        Customer.id = 0
+    }
+    
+    @IBAction func deleteCustomer(_ sender: Any) {
+        deleteCustomer()
+    }
+    
 }
 
-
+//MARK: read data
 extension ViewController {
-    func saveBasicTypes() {
-        db.child("int").setValue(3)
-        db.child("double").setValue(2.5)
-        db.child("str").setValue("321")
-        db.child("array").setValue(["a","b","c"])
-        db.child("dict").setValue(["id": "anyId", "age": "10", "city": "seoul"])
-    }
     
     func saveCustomers() {
         let books = [Book(title: "Good to Great", author: "Someone"), Book(title: "1234", author: "some")]
         
         let customer1 = Customer(id: "\(Customer.id)", name: "Son", books: books )
         Customer.id+=1
-        let customer2 = Customer(id: "\(Customer.id)", name: "Son2", books: books )
+        let customer2 = Customer(id: "\(Customer.id)", name: "Kim", books: books )
         Customer.id+=1
 
         db.child("customers").child(customer1.id).setValue(customer1.toDic)
         db.child("customers").child(customer2.id).setValue(customer2.toDic)
     }
-}
-
-//MARK: read data
-extension ViewController {
+    
     func fetchCustomers(){
         db.child("customers").observeSingleEvent(of: .value) { snapshot in
-            print("---> \(snapshot.value)")
-            
             do{
+                guard snapshot.exists() else {
+                    DispatchQueue.main.async {
+                        self.numberOfCustomers.text = "# of Customers: 0"
+                    }
+                    return
+                }
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value, options: [])
                 
                 let decoder = JSONDecoder()
                 let customers: [Customer] = try decoder.decode([Customer].self, from: data)
+                self.customers = customers
                 DispatchQueue.main.async {
                     self.numberOfCustomers.text = "# of Customers: \(customers.count)"
                 }
@@ -78,9 +106,10 @@ extension ViewController {
         }
     }
 }
+
 struct Customer: Codable{
     let id: String
-    let name: String
+    var name: String
     let books: [Book]
     
     var toDic: [String: Any] {
